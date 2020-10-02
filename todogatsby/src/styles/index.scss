@@ -1,0 +1,38 @@
+.header-menu a{
+   color: white;
+   text-decoration: none;
+   &:not(:first-child){
+       padding-left: 30px;
+   }
+}
+.btn-edit{
+    background-color: #ffffff;
+    border: none !important;
+    margin-top: 28px;
+    & i {
+        color: #007bff;
+    }
+}
+.btn-close{
+    background-color: #ffffff;
+    border: none !important;
+    & i {
+        color: rgb(235, 100, 100);
+    }
+}
+.blog-view {  
+    margin-top: 20px;
+    width: 70%;
+    &-title {
+    background-color: whitesmoke;
+    width: 95%;
+    padding: 10px 15px;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+   }
+}
+.content-page{
+    min-height: calc(100vh - 100px);
+}

@@ -1,0 +1,47 @@
+.card-blog{
+    background-color: whitesmoke;
+    border-radius: 4px;
+    height: 100%;
+    position: relative;
+    padding: 1.25rem 2.5rem 1.25rem 1.5rem;
+    &_header{
+        &_text{
+            h2{
+                display: -webkit-box;
+                -webkit-line-clamp: 1;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+            p{
+                font-size: 14px;
+            }
+            &-description{
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+        }
+        img{
+            width: 70px;
+            height: 50px;
+            object-fit: contain;
+        }
+    }
+    &_content{
+        height: 170px;
+        display: -webkit-box;
+        -webkit-line-clamp: 6;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        font-size: 16px;
+    }
+    &_tag{
+        color: #007bff;
+        font-weight: 600;
+    }
+}
+.select-title{
+    font-weight: 600;
+    font-size: 36px;
+}
