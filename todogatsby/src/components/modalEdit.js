@@ -3,7 +3,7 @@ import { Button, Form, Modal } from 'react-bootstrap';
 import 'react-notifications/lib/notifications.css';
 import { ToastContainer, toast } from 'react-toastify';
 const ModalEdit = (props) => {
-  
+
     const [item, setItem] = useState(props.data);
     const [modalShow, setModalShow] = useState(false);
     const [image, setImage] = useState('');
@@ -23,11 +23,9 @@ const ModalEdit = (props) => {
         setItem({ ...item, [key]: event.target.value });
     }
     const UpdateBlog = () => {
-        if (valueEnter.classify,valueEnter.title,valueEnter.description,valueEnter.datetime,valueEnter.image,valueEnter.body,valueEnter.tag) {
+        if ((valueEnter.classify, valueEnter.title, valueEnter.description, valueEnter.datetime, valueEnter.image, valueEnter.body, valueEnter.tag)) {
             props.UpdateBlog(valueEnter);
-            
             onHide();
-            
         }
         else {
             toast.error('Update fail')
@@ -35,7 +33,7 @@ const ModalEdit = (props) => {
     }
     return (
         <div>
-            <button className="btn-edit ml-3" type="button" onClick={handleShow}><i className="fa fa-pencil" aria-hidden="true"></i></button>
+            <Button className="btn-edit" type="button" onClick={handleShow}><i className="fa fa-pencil" aria-hidden="true"></i></Button>
             <Modal
                 show={modalShow} onHide={onHide}
                 size="lg"

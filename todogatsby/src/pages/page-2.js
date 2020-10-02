@@ -42,7 +42,7 @@ const SecondPage = () => {
     tag: infor.tag
   };
   const SubmitCreate = () => {
-    if (valueEnter.title, valueEnter.description, valueEnter.datetime, valueEnter.image, valueEnter.body, valueEnter.tag) {
+    if ((valueEnter.title, valueEnter.description, valueEnter.datetime, valueEnter.image, valueEnter.body, valueEnter.tag)) {
       listBlog.push(valueEnter);
       toast.success('Success message');
       setTimeout(() => {
@@ -163,7 +163,7 @@ const SecondPage = () => {
               <div key={index} className="d-flex">
                 <div className="d-flex blog-view">
                   <div className="blog-view-title">{item.title}</div>
-                  <button className="btn-close ml-3" onClick={() => deleteBlog(item.id)}><i className="fa fa-times-circle"></i></button>
+                  <Button className="btn-close ml-3" onClick={() => deleteBlog(item.id)}><i className="fa fa-times-circle"></i></Button>
                   <ToastContainer />
                 </div>
                 <ModalEdit data={item} UpdateBlog={UpdateBlog} />
