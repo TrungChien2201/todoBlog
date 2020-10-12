@@ -6,7 +6,8 @@ const ModalEdit = (props) => {
 
     const [item, setItem] = useState(props.data);
     const [modalShow, setModalShow] = useState(false);
-    const [image, setImage] = useState('');
+    const [validated, setValidated] = useState(false);
+    const [images, setImage] = useState('');
     const onHide = () => { setModalShow(false) }
     const handleShow = () => setModalShow(true);
     const valueEnter = {
@@ -15,21 +16,29 @@ const ModalEdit = (props) => {
         title: item.title,
         description: item.description,
         datetime: item.datetime,
-        image: image.name,
+        image: images.name,
         body: item.body,
         tag: item.tag
     };
     const handleOnchange = (key) => (event) => {
         setItem({ ...item, [key]: event.target.value });
     }
-    const UpdateBlog = () => {
-        if ((valueEnter.classify, valueEnter.title, valueEnter.description, valueEnter.datetime, valueEnter.image, valueEnter.body, valueEnter.tag)) {
+    const UpdateBlog = (e) => {
+        e.preventDefault();
+        const form = e.currentTarget;
+        if (form.checkValidity() === false) {
+            
+            e.stopPropagation();
+            setValidated(true);
+        }
+        
+        else{
             props.UpdateBlog(valueEnter);
             onHide();
+            setValidated(false)
         }
-        else {
-            toast.error('Update fail')
-        }
+           
+       
     }
     return (
         <div>
@@ -44,11 +53,12 @@ const ModalEdit = (props) => {
                         Edit Blog
                 </Modal.Title>
                 </Modal.Header>
+                <Form noValidate validated={validated} onSubmit={UpdateBlog}>
                 <Modal.Body>
-                    <Form>
+                    
                         <Form.Group controlId="exampleForm.SelectCustom">
                             <Form.Label >Classify Blog</Form.Label>
-                            <Form.Control as="select" value={item.classify} custom onChange={handleOnchange("classify")}>
+                            <Form.Control required as="select" value={item.classify} custom onChange={handleOnchange("classify")}>
                                 <option value="">Choose option</option>
                                 <option value="sport">Sport</option>
                                 <option value="entertainment">Entertainment</option>
@@ -56,44 +66,63 @@ const ModalEdit = (props) => {
                                 <option value="other">Others</option>
 
                             </Form.Control>
+                            <Form.Control.Feedback type="invalid">
+                                Please provide a valid state.
+                            </Form.Control.Feedback>
                         </Form.Group>
                         <Form.Group controlId="formBasicEmail">
                             <Form.Label>Title</Form.Label>
-                            <Form.Control type="text-muted" value={item.title} onChange={handleOnchange("title")} placeholder="title" />
+                            <Form.Control required type="text-muted" value={item.title} onChange={handleOnchange("title")} placeholder="title" />
                             <Form.Text className="text-muted">
                                 We'll never share content blog with anyone else.
                             </Form.Text>
+                            <Form.Control.Feedback type="invalid">
+                                Please provide a valid state.
+                            </Form.Control.Feedback>
                         </Form.Group>
 
                         <Form.Group controlId="formBasicPassword">
                             <Form.Label>Desciption</Form.Label>
-                            <Form.Control type="text-muted" value={item.description} onChange={handleOnchange("description")} placeholder="description" />
+                            <Form.Control required type="text-muted" value={item.description} onChange={handleOnchange("description")} placeholder="description" />
+                            <Form.Control.Feedback type="invalid">
+                                Please provide a valid state.
+                            </Form.Control.Feedback>
                         </Form.Group>
                         <Form.Group controlId="formBasicPassword">
                             <Form.Label>Image</Form.Label>
-                            <Form.Control type="file" onChange={(e) => setImage(e.target.files[0])} placeholder="image" />
+                            <Form.Control required type="file" onChange={(e) => setImage(e.target.files[0])} placeholder="image" />
+                            <Form.Control.Feedback type="invalid">
+                                Please provide a valid state.
+                            </Form.Control.Feedback>
                         </Form.Group>
                         <Form.Group controlId="formBasicPassword">
                             <Form.Label>Body</Form.Label>
-                            <Form.Control type="text-muted" value={item.body} onChange={handleOnchange("body")} as="textarea" rows="6" placeholder="body" />
+                            <Form.Control required type="text-muted" value={item.body} onChange={handleOnchange("body")} as="textarea" rows="6" placeholder="body" />
+                            <Form.Control.Feedback type="invalid">
+                                Please provide a valid state.
+                            </Form.Control.Feedback>
                         </Form.Group>
                         <Form.Group controlId="formBasicPassword">
                             <Form.Label>Tag</Form.Label>
-                            <Form.Control type="text-muted" value={item.tag} onChange={handleOnchange("tag")} placeholder="tag" />
+                            <Form.Control required type="text-muted" value={item.tag} onChange={handleOnchange("tag")} placeholder="tag" />
+                            <Form.Control.Feedback type="invalid">
+                                Please provide a valid state.
+                            </Form.Control.Feedback>
                         </Form.Group>
 
-                    </Form>
+                   
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="primary" onClick={UpdateBlog} type="button">
+                    <Button variant="primary" type="submit">
                         Submit
                     </Button>
                     <ToastContainer />
                     <Button variant="danger" onClick={onHide}>Close</Button>
                 </Modal.Footer>
+                </Form>
             </Modal>
         </div>
 
     )
 };
-export default ModalEdit;
+export default React.memo(ModalEdit);

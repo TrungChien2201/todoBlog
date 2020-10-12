@@ -6,8 +6,9 @@ import '../styles/blog.scss'
 const Blog = () => {
     const blogContent = JSON.parse(localStorage.getItem('contentblog'));
     const [listBlog, setListBlog] = useState(blogContent ? blogContent : []);
+    const [listFilter, setListFilter] = useState(blogContent ? blogContent : [])
     const handleOnchange = (valueSelect) => {
-        const FilterValue = listBlog.filter(el => el.classify === valueSelect.target.value)
+        const FilterValue = listFilter.filter(el => el.classify === valueSelect);
         setListBlog(FilterValue)
     }
     const ReesetListBlog = () => {
@@ -26,7 +27,7 @@ const Blog = () => {
                         <Form.Group controlId="exampleForm.SelectCustom" >
                             <Form.Label className="select-title">Custom select</Form.Label>
 
-                            <Form.Control className="mt-2" as="select" custom onChange={handleOnchange} >
+                            <Form.Control className="mt-2" as="select" custom onChange={(e)=> handleOnchange(e.target.value)} >
                                 <option value="">Choose option</option>
                                 <option value="sport">Sport</option>
                                 <option value="entertainment">Entertainment</option>

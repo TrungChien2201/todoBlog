@@ -17,8 +17,8 @@ const SecondPage = () => {
   }
 `)
   const [isdisplay, setisDisplay] = useState();
-  const [image, setImage] = useState('');
-
+  const [images, setImage] = useState('');
+  const [validated, setValidated] = useState(false);
   const [infor, setinfor] = useState({
     id: '',
     classify: '',
@@ -37,33 +37,37 @@ const SecondPage = () => {
     title: infor.title,
     description: infor.description,
     datetime: site.buildTime,
-    image: image.name,
+    image: images.name,
     body: infor.body,
     tag: infor.tag
   };
-  const SubmitCreate = () => {
-    if ((valueEnter.title, valueEnter.description, valueEnter.datetime, valueEnter.image, valueEnter.body, valueEnter.tag)) {
-      listBlog.push(valueEnter);
-      toast.success('Success message');
-      setTimeout(() => {
-        localStorage.setItem('contentblog', JSON.stringify(listBlog));
-        setinfor({
-          classify: '',
-          title: '',
-          description: '',
-          datetime: '',
-          image: '',
-          body: '',
-          tag: ''
-        })
-        setisDisplay('');
-      }, 2000);
+  const SubmitCreate = (e) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    if (form.checkValidity() === false) {
+      e.stopPropagation();
+      setValidated(true);
     }
     else {
-      toast.error('Value is not null')
+      listBlog.push(valueEnter);
+      toast.success('Create blog success');
+
+      localStorage.setItem('contentblog', JSON.stringify(listBlog));
+      setinfor({
+        classify: '',
+        title: '',
+        description: '',
+        datetime: '',
+        image: '',
+        body: '',
+        tag: ''
+      })
+      setisDisplay('');
+      setValidated(false);
     }
   }
   const handleOnchange = (key) => (event) => {
+
     setinfor({ ...infor, [key]: event.target.value })
   }
 
@@ -81,11 +85,8 @@ const SecondPage = () => {
       toast.error('Delete fail');
     }
     const filterList = listBlog.filter(el => el.id !== itemId);
-    setTimeout(() => {
-      setListBlog(filterList);
-      localStorage.setItem('contentblog', JSON.stringify(filterList));
-    }, 1000);
-
+    setListBlog(filterList);
+    localStorage.setItem('contentblog', JSON.stringify(filterList));
   }
 
   const UpdateBlog = (item) => {
@@ -101,11 +102,8 @@ const SecondPage = () => {
       }
       return el
     })
-    setTimeout(() => {
-      setListBlog(editBlog);
-      localStorage.setItem('contentblog', JSON.stringify(editBlog))
-    }, 1000);
-
+    setListBlog(editBlog);
+    localStorage.setItem('contentblog', JSON.stringify(editBlog))
   }
   return (
     <Layout>
@@ -116,42 +114,56 @@ const SecondPage = () => {
         {isdisplay ? <Button type="button" variant="danger" onClick={CloseForm}>Close</Button> : <Button type="button" onClick={OpenForm}>New Blog</Button>}
         {isdisplay ?
           <div className="mt-3">
-            <Form>
+            <Form noValidate validated={validated} onSubmit={SubmitCreate}>
               <Form.Group controlId="exampleForm.SelectCustom">
                 <Form.Label >Classify Blog</Form.Label>
-                <Form.Control as="select" custom onChange={handleOnchange("classify")}>
+                <Form.Control required as="select" custom onChange={handleOnchange("classify")}>
                   <option value="">Choose option</option>
                   <option value="sport">Sport</option>
                   <option value="entertainment">Entertainment</option>
                   <option value="information">Information</option>
                   <option value="other">Others</option>
                 </Form.Control>
+                <Form.Control.Feedback type="invalid">Please provide a valid state.</Form.Control.Feedback>
               </Form.Group>
               <Form.Group controlId="formBasicEmail">
                 <Form.Label>Title</Form.Label>
-                <Form.Control type="text-muted" value={infor.title} onChange={handleOnchange("title")} placeholder="title" />
+                <Form.Control required type="text-muted" value={infor.title} onChange={handleOnchange("title")} placeholder="title" />
                 <Form.Text className="text-muted">
                   We'll never share content blog with anyone else.
             </Form.Text>
+                <Form.Control.Feedback type="invalid">Please provide a valid state.</Form.Control.Feedback>
               </Form.Group>
 
               <Form.Group controlId="formBasicPassword">
                 <Form.Label>Desciption</Form.Label>
-                <Form.Control type="text-muted" value={infor.description} onChange={handleOnchange("description")} placeholder="description" />
+                <Form.Control required type="text-muted" value={infor.description} onChange={handleOnchange("description")} placeholder="description" />
+                <Form.Control.Feedback type="invalid">
+                  Please provide a valid zip.
+          </Form.Control.Feedback>
               </Form.Group>
               <Form.Group controlId="formBasicPassword">
                 <Form.Label>Image</Form.Label>
-                <Form.Control type="file" value={infor.image} onChange={(e) => setImage(e.target.files[0])} placeholder="image" />
+                <Form.Control required type="file" onChange={(e) => setImage(e.target.files[0])} placeholder="image" />
+                <Form.Control.Feedback type="invalid">
+                  Please provide a valid zip.
+          </Form.Control.Feedback>
               </Form.Group>
               <Form.Group controlId="formBasicPassword">
                 <Form.Label>Body</Form.Label>
-                <Form.Control type="text-muted" value={infor.body} onChange={handleOnchange("body")} as="textarea" rows="6" placeholder="body" />
+                <Form.Control required type="text-muted" value={infor.body} onChange={handleOnchange("body")} as="textarea" rows="6" placeholder="body" />
+                <Form.Control.Feedback type="invalid">
+                  Please provide a valid zip.
+          </Form.Control.Feedback>
               </Form.Group>
               <Form.Group controlId="formBasicPassword">
                 <Form.Label>Tag</Form.Label>
-                <Form.Control type="text-muted" value={infor.tag} onChange={handleOnchange("tag")} placeholder="tag" />
+                <Form.Control required type="text-muted" value={infor.tag} onChange={handleOnchange("tag")} placeholder="tag" />
+                <Form.Control.Feedback type="invalid">
+                  Please provide a valid zip.
+          </Form.Control.Feedback>
               </Form.Group>
-              <Button variant="primary" onClick={SubmitCreate} type="button">
+              <Button variant="primary"  type="submit">
                 Submit
             </Button>
               <ToastContainer />

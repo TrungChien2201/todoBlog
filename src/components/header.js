@@ -18,7 +18,7 @@ const Header = ({ siteTitle }) => (
       }}
     >
       <Link to="/">Home</Link> 
-      <Link to="/page-2/">Admin</Link> 
+      <Link to="/admin/">Admin</Link> 
       <Link to="/blog/">Blog</Link>
     </div>
   </header>
