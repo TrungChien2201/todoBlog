@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Form } from 'react-bootstrap';
+import { Button, Form, Image } from 'react-bootstrap';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 import '../styles/blog.scss'
@@ -44,7 +44,7 @@ const Blog = () => {
                         <div key={index} className="col-6 py-3">
                             <div className="card-blog">
                                 <div className="d-flex card-blog_header">
-                                    <img src={`/images/${item.image}`} />
+                                    <Image src={`/images/${item.image}`} />
                                     <div className="pl-3 card-blog_header_text">
                                         <h5 className="mb-0">{item.title}</h5>
                                         <p className="mb-0 card-blog_header_text-description">({item.description})</p>

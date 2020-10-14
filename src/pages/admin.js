@@ -29,6 +29,7 @@ const SecondPage = () => {
     body: '',
     tag: ''
   });
+  
   const blogcontent = JSON.parse(localStorage.getItem('contentblog'));
   const [listBlog, setListBlog] = useState(blogcontent ? blogcontent : []);
   const valueEnter = {

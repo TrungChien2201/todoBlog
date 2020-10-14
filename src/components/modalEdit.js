@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 import 'react-notifications/lib/notifications.css';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 const ModalEdit = (props) => {
 
     const [item, setItem] = useState(props.data);
