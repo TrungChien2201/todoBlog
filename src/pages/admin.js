@@ -29,18 +29,18 @@ const SecondPage = () => {
     body: '',
     tag: ''
   });
-  
+  const {classify,title,description,body,tag} = infor;
   const blogcontent = JSON.parse(localStorage.getItem('contentblog'));
   const [listBlog, setListBlog] = useState(blogcontent ? blogcontent : []);
   const valueEnter = {
     id: uuidv4(),
-    classify: infor.classify,
-    title: infor.title,
-    description: infor.description,
+    classify,
+    title,
+    description,
     datetime: site.buildTime,
     image: images.name,
-    body: infor.body,
-    tag: infor.tag
+    body,
+    tag
   };
   const SubmitCreate = (e) => {
     e.preventDefault();

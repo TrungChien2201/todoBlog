@@ -13,7 +13,9 @@ const Blog = () => {
     }
     const ReesetListBlog = () => {
         setListBlog(blogContent)
+        setListFilter(blogContent)
     }
+  
     return (
         <Layout>
             <SEO title="Page two" />
@@ -44,7 +46,7 @@ const Blog = () => {
                         <div key={index} className="col-6 py-3">
                             <div className="card-blog">
                                 <div className="d-flex card-blog_header">
-                                    <Image src={`/images/${item.image}`} />
+                                        <Image src={`/images/${item.image}`} />
                                     <div className="pl-3 card-blog_header_text">
                                         <h5 className="mb-0">{item.title}</h5>
                                         <p className="mb-0 card-blog_header_text-description">({item.description})</p>

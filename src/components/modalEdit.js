@@ -5,6 +5,7 @@ import { ToastContainer } from 'react-toastify';
 const ModalEdit = (props) => {
 
     const [item, setItem] = useState(props.data);
+    const {classify,title,description,body,tag} = item;
     const [modalShow, setModalShow] = useState(false);
     const [validated, setValidated] = useState(false);
     const [images, setImage] = useState('');
@@ -12,13 +13,13 @@ const ModalEdit = (props) => {
     const handleShow = () => setModalShow(true);
     const valueEnter = {
         id: item.id,
-        classify: item.classify,
-        title: item.title,
-        description: item.description,
+        classify,
+        title,
+        description,
         datetime: item.datetime,
         image: images.name,
-        body: item.body,
-        tag: item.tag
+        body,
+        tag
     };
     const handleOnchange = (key) => (event) => {
         setItem({ ...item, [key]: event.target.value });
